@@ -1,19 +1,16 @@
 ﻿using InAndOut.Data;
 using InAndOut.Models;
-using InAndOut.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace InAndOut.Controllers
 {
-    public class ExpenssesController : Controller
+    public class ExpenssesTypeController : Controller
     {
         private readonly ApplicationDbContext _db;
 
 
-        public ExpenssesController(ApplicationDbContext db)
+        public ExpenssesTypeController(ApplicationDbContext db)
         {
             _db = db;
         }
@@ -23,47 +20,26 @@ namespace InAndOut.Controllers
         // dependcy injections 
         public IActionResult Index()
         {
-            IEnumerable<Expense> objList = _db.Expenses;
-
-            foreach (var obj in objList)
-            {
-                obj.ExpenseType = _db.ExpensesTypes.FirstOrDefault(u => u.Id == obj.ExpenseTypeId);
-            }
+            IEnumerable<ExpenseType> objList = _db.ExpensesTypes;
             return View(objList);
         }
 
         //GET create 
         public IActionResult Create()
         {
-            //IEnumerable<SelectListItem> typeDropDown = _db.ExpensesTypes.Select(i => new SelectListItem
-            //{
-            //    Text = i.Name,
-            //    Value = i.Id.ToString(),    
-            //});
-            ExpensesVm expenseVM = new ExpensesVm()
-            {
-                Expense = new Expense(),
-                TypeDropDown = _db.ExpensesTypes.Select(i => new SelectListItem
-                {
-                    Text = i.Name,
-                    Value = i.Id.ToString(),
-                })
-
-            };
-
-            // ViewBag.TypeDropDown = typeDropDown;
-            return View(expenseVM);
+            return View();
         }
 
         //POST Create 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(ExpensesVm obj)
+        public IActionResult Create(ExpenseType obj)
         {
+
             if (ModelState.IsValid)
             {
-                // obj.ExpenseTypeId = 2;
-                _db.Expenses.Add(obj.Expense);
+
+                _db.ExpensesTypes.Add(obj);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -80,7 +56,7 @@ namespace InAndOut.Controllers
                 return NotFound();
             }
 
-            var obj = _db.Expenses.Find(id);
+            var obj = _db.ExpensesTypes.Find(id);
             if (obj == null)
             {
                 return NotFound();
@@ -96,14 +72,14 @@ namespace InAndOut.Controllers
         public IActionResult DeletePost(int? id)
         {
 
-            var obj = _db.Expenses.Find(id);
+            var obj = _db.ExpensesTypes.Find(id);
 
             if (obj == null)
             {
                 return NotFound();
             }
 
-            _db.Expenses.Remove(obj);
+            _db.ExpensesTypes.Remove(obj);
             _db.SaveChanges();
             return RedirectToAction("Index");
 
@@ -113,40 +89,32 @@ namespace InAndOut.Controllers
         public IActionResult Update(int? id)
         {
 
-            ExpensesVm expenseVM = new ExpensesVm()
-            {
-                Expense = new Expense(),
-                TypeDropDown = _db.ExpensesTypes.Select(i => new SelectListItem
-                {
-                    Text = i.Name,
-                    Value = i.Id.ToString(),
-                })
-
-            };
 
             if (id == null || id == 0)
             {
                 return NotFound();
             }
 
-            expenseVM.Expense = _db.Expenses.Find(id);
-            if (expenseVM.Expense == null)
+            var obj = _db.ExpensesTypes.Find(id);
+            if (obj == null)
             {
                 return NotFound();
             }
-            return View(expenseVM);
+            return View(obj);
 
         }
+         
+
 
         //Post Update
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult UpdatePost(ExpensesVm obj)
+        public IActionResult UpdatePost(ExpenseType obj)
         {
 
             if (ModelState.IsValid)
             {
-                _db.Expenses.Update(obj.Expense);
+                _db.ExpensesTypes.Update(obj);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }

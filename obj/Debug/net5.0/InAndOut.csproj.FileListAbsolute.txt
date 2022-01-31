@@ -150,3 +150,7 @@ C:\Users\muham\source\repos\InAndOut\InAndOut\obj\Debug\net5.0\Razor\Views\Expen
 C:\Users\muham\source\repos\InAndOut\InAndOut\obj\Debug\net5.0\Razor\Views\Expensses\Create.cshtml.g.cs
 C:\Users\muham\source\repos\InAndOut\InAndOut\obj\Debug\net5.0\Razor\Views\Expensses\Delete.cshtml.g.cs
 C:\Users\muham\source\repos\InAndOut\InAndOut\obj\Debug\net5.0\Razor\Views\Expensses\Update.cshtml.g.cs
+C:\Users\muham\source\repos\InAndOut\InAndOut\obj\Debug\net5.0\Razor\Views\ExpenssesType\Create.cshtml.g.cs
+C:\Users\muham\source\repos\InAndOut\InAndOut\obj\Debug\net5.0\Razor\Views\ExpenssesType\Delete.cshtml.g.cs
+C:\Users\muham\source\repos\InAndOut\InAndOut\obj\Debug\net5.0\Razor\Views\ExpenssesType\Index.cshtml.g.cs
+C:\Users\muham\source\repos\InAndOut\InAndOut\obj\Debug\net5.0\Razor\Views\ExpenssesType\Update.cshtml.g.cs

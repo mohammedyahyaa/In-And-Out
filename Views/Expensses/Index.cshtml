@@ -21,6 +21,7 @@
                 <tr>
                     <th>Expense Name</th>
                     <th>Amount</th>
+                    <th>Expense Type </th>
                     <th>Modification</th>
 
                 </tr>
@@ -31,6 +32,8 @@
                     <tr>
                         <td width="35%">@Expense.ExpenseName</td>
                         <td width="35%"> @Expense.Amount</td>
+                        <td width="35%"> @Expense.ExpenseType.Name</td>
+
                         <td width="30%">
                             <div class="w-100 btn-group" role="group">
                                 <a asp-controller="Expensses" asp-action="Update" asp-route-Id="@Expense.Id" class="btn btn-primary mx-1">Update</a>
